@@ -1,5 +1,7 @@
 # STR
 ## Used to save and manage my str projects
+### Youtube video (spanish)
+https://youtu.be/rrK-u-J-YtQ
 
 have to install the next libraries:
 - numpy 
