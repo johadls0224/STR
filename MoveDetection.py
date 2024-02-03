@@ -1,5 +1,10 @@
 import cv2
 import numpy as np
+import pygame as pg
+
+pg.init()
+pg.mixer.init()
+sound = pg.mixer.Sound("videoplayback.mp3")
 
 cap = cv2.VideoCapture(0)
 i = 0
@@ -21,11 +26,12 @@ while (True):
             area = cv2.contourArea(c)
             if area > 9000:
                 x,y,w,h = cv2.boundingRect(c)
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (55, 155, 0), 2)
                 #(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 print("Detectando movimiento...PIIIII")
+                sound.play()
 
-    cv2.imshow('video1', frame)
+    cv2.imshow('camarita', frame)
     i = i+1
     if cv2.waitKey(1) & 0xFF == ord ('q'):
         break
