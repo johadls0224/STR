@@ -6,12 +6,12 @@ import threading
 pg.init()
 pg.mixer.init()
 sound = pg.mixer.Sound("videoplayback.mp3")
-
 cap = cv2.VideoCapture(0)
 i = 0
 backGround = None  # Variable compartida entre hilos
-semaforo = threading.Semaphore(1)  # Inicializar el semáforo con un valor de 1
+semaforo = threading.Semaphore(1)  # Inicializar el semaforo con un valor de 1
 
+# Analisis de los frames de la imagen de fondo y la actual 
 def actualizar_fondo():
     global i, backGround
     while True:
@@ -24,7 +24,7 @@ def actualizar_fondo():
                 backGround = gray
         i += 1
 
-# Iniciar un hilo para la actualización del fondo
+# Iniciar un hilo para la actualizacion del fondo
 hilo_actualizacion = threading.Thread(target=actualizar_fondo)
 hilo_actualizacion.start()
 
@@ -40,7 +40,7 @@ while True:
             dif = cv2.absdiff(gray, backGround)
             _, th = cv2.threshold(dif, 40, 255, cv2.THRESH_BINARY)
             cnts,_ = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            
+            # Dibujar contorno de area con movimiento detectada
             for c in cnts:
                 area = cv2.contourArea(c)
                 if area > 8000:
@@ -48,7 +48,6 @@ while True:
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (55, 255, 0), 2)
                     print("Detectando movimiento...PIIIII")
                     sound.play()
-
     cv2.imshow('camarita', frame)
     
     if cv2.waitKey(1) & 0xFF == ord ('q'):
@@ -57,5 +56,6 @@ while True:
 # Esperar a que el hilo de actualización termine
 hilo_actualizacion.join()
 
+# Liberar recursos
 cap.release()
 cv2.destroyAllWindows()
