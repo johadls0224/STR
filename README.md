@@ -1,6 +1,22 @@
 # STR
 ## Used to save and manage my str projects
 
+# Video explicativo sobre la implementacoin final del proyecto de programacion e tiempo real (https://youtu.be/igiip3M1lYs)
+## En el mismo se estara explicando los siguientes temas implementados e el proyecto de tiempo real desde el principio:
+## Librerias utilizadas:
+- numpy
+- opencv
+- pygame
+- threading
+## Temas tratados e implementados:
+- Manejo de eventos.
+- Manejo de procesos.
+- Concurrencia.
+- Sincronizacion de procesos.
+- Monitoreo de procesos.
+- Manejo de excepciones.
+- Inteligencia aartificial.
+
 ## Motion Detector
 ### Youtube video (spanish)
 https://youtu.be/rrK-u-J-YtQ
