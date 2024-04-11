@@ -1,10 +1,13 @@
+# Jhoan De Los Santos 22-1005
+# Materia: Programacion en tiempo real
+# Maestro: Joerlyn Morfe
+# Link del video (el video es privado, por lo que solo los que tengan este link podran verlo): https://youtu.be/igiip3M1lYs
 import cv2
 import numpy as np
 import pygame as pg
 import threading
 
-# Inicializar la librerías pygame y mixer
-pg.init()
+# Inicializar la librerias
 pg.mixer.init()
 
 # Cargar del audio usado para la alerta
@@ -13,7 +16,7 @@ sound = pg.mixer.Sound("videoplayback.mp3")
 # Captura de video
 cap = cv2.VideoCapture(0)
 
-# Variable para el índice de los frames
+# Variable para el indice de los frames
 i = 0
 
 # Clase Monitor para sincronizar acceso a la variable "backGround"
@@ -33,7 +36,7 @@ class Monitor:
 # Instancia del Monitor
 monitor = Monitor()
 
-# Función para actualizar el fondo en segundo plano
+# Funcion para actualizar el fondo en segundo plano
 def actualizar_fondo():
     global i
     try:
@@ -46,13 +49,13 @@ def actualizar_fondo():
                 monitor.set_background(gray)
             i += 1
     except Exception as e:
-        print("Error en la actualización del fondo:", e)
+        print("Error en la actualizacion del fondo:", e)
 
-# Inicio del hilo para la actualización del fondo
+# Inicio del hilo para la actualizacion del fondo
 hilo_actualizacion = threading.Thread(target=actualizar_fondo)
 hilo_actualizacion.start()
 
-# Función recursiva para detectar movimiento
+# Funcion recursiva para detectar movimiento
 def detectar_movimiento(frame):
     try:
         ret, next_frame = cap.read()
@@ -76,12 +79,12 @@ def detectar_movimiento(frame):
             return
         detectar_movimiento(next_frame)
     except Exception as e:
-        print("Error en la detección de movimiento:", e)
+        print("Error en la deteccion de frames:", e)
 
-# Inicio de la detección de movimiento
+# Inicio de la deteccion de movimiento
 detectar_movimiento(cap.read()[1])
 
-# Espera a que el hilo de actualización termine
+# Espera a que el hilo de actualizacion termine
 hilo_actualizacion.join()
 
 # Liberar recursos
